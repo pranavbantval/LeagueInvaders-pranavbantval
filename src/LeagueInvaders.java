@@ -3,16 +3,17 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class LeagueInvaders {
+	//member variables
 	JFrame frame;
 	GamePanel gamepanel;
-	final int WIDTH = 500;
-	final int HEIGHT = 800;
-
+	static final int WIDTH = 500;
+	static final int HEIGHT = 800;
+//constructor
 	public LeagueInvaders() {
 		frame = new JFrame();
 		gamepanel = new GamePanel();
 	}
-
+//methods
 	public void setup() {
 
 		frame.add(gamepanel);
