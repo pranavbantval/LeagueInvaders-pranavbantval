@@ -12,12 +12,13 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	//member variables
+	Rocketship rocket= new Rocketship(250,700,50,50);
 	Timer timer;
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
-;
+ObjectManager managerBob = new ObjectManager(rocket);
 Font titleFont = new Font("Comic Sans", Font.PLAIN, 48);
 Font subtitleFont = new Font("Comic Sans",Font.PLAIN,25);
 //constructor
@@ -30,7 +31,7 @@ Font subtitleFont = new Font("Comic Sans",Font.PLAIN,25);
 		
 	}
 void updateGameState() {
-		
+		managerBob.update();
 	}
 void updateEndState() {
 	
@@ -48,7 +49,8 @@ void drawMenuState(Graphics g) {
 void drawGameState(Graphics g) {
 	g.setColor(Color.BLACK);
 	g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
-	
+	managerBob.draw(g);
+
 }
 void drawEndState(Graphics g) {
 	g.setColor(Color.RED);
@@ -74,6 +76,7 @@ void drawEndState(Graphics g) {
 			 drawMenuState(g);
      }else if(currentState == GAME_STATE){
     	 drawGameState(g);
+    		//System.out.println("draw gamestate");
      }else if(currentState == END_STATE){
              drawEndState(g);
      }
@@ -94,13 +97,13 @@ void drawEndState(Graphics g) {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-System.out.println("message1");
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("message2");
+
 		
 		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 			if(currentState==END_STATE) {
@@ -110,12 +113,29 @@ System.out.println("message1");
 				currentState++;
 			}
 		}
+		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+		rocket.x=rocket.x-rocket.speed;
+		managerBob.update();
+		}
+		else if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		rocket.x=rocket.x+rocket.speed;
+		managerBob.update();
+		}
+		else if(e.getKeyCode()==KeyEvent.VK_UP) {
+			rocket.y=rocket.y-rocket.speed;
+			managerBob.update();
+			}
+		else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+			rocket.y=rocket.y+rocket.speed;
+			managerBob.update();
+			}
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("message3");
+	
 	}
 
 }
