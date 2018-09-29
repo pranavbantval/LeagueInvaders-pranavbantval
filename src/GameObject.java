@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class GameObject {
 	//member variables
@@ -7,6 +8,7 @@ public class GameObject {
 	int y;
 	int width;
 	int height;
+	Rectangle collisionBox = new Rectangle();
 	//constructor
 	public GameObject(int x, int y, int width, int height) {
 		this.x=x;
@@ -16,7 +18,7 @@ public class GameObject {
 	}
 //methods
 	void update() {
-		
+	collisionBox.setBounds(x, y, width, height);	
 	}
 	void draw(Graphics g) {
 	

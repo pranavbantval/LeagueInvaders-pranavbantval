@@ -32,6 +32,10 @@ Font subtitleFont = new Font("Comic Sans",Font.PLAIN,25);
 	}
 void updateGameState() {
 		managerBob.update();
+		managerBob.manageEnemies();
+		managerBob.purgeObjects();
+		managerBob.checkCollision();
+		
 	}
 void updateEndState() {
 	
@@ -92,6 +96,9 @@ void drawEndState(Graphics g) {
      }else if(currentState == END_STATE){
              updateEndState();
      }repaint();
+     
+     
+     
 	}
 
 	@Override
@@ -113,7 +120,7 @@ void drawEndState(Graphics g) {
 				currentState++;
 			}
 		}
-		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+		else if(e.getKeyCode()==KeyEvent.VK_LEFT) {
 		rocket.x=rocket.x-rocket.speed;
 		managerBob.update();
 		}
@@ -129,7 +136,10 @@ void drawEndState(Graphics g) {
 			rocket.y=rocket.y+rocket.speed;
 			managerBob.update();
 			}
-		
+		else if(e.getKeyCode()==KeyEvent.VK_SPACE) {
+			managerBob.addProjectile(rocket.x+20, rocket.y, 10,10);
+			managerBob.update();
+			}
 	}
 
 	@Override
