@@ -14,8 +14,13 @@ public class Alien extends GameObject {
 		void update() {
 			super.update();
 			y++;
+			if(y>800) {
+				isAlive=false;
+			}
 		}
 		void draw(Graphics g) {
+			g.setColor(Color.red);
+			g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 			g.setColor(Color.YELLOW);
 	        g.fillRect(x, y, width, height);	
 		}

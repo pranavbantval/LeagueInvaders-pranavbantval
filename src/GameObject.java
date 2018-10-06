@@ -8,17 +8,19 @@ public class GameObject {
 	int y;
 	int width;
 	int height;
-	Rectangle collisionBox = new Rectangle();
+	Rectangle collisionBox;
 	//constructor
 	public GameObject(int x, int y, int width, int height) {
 		this.x=x;
 		this.y=y;
 		this.height=height;
 		this.width=width;
+		collisionBox = new Rectangle();
+		collisionBox.setBounds(x, y, width, height);
 	}
 //methods
 	void update() {
-	collisionBox.setBounds(x, y, width, height);	
+	collisionBox.setBounds(x, y, width, height);
 	}
 	void draw(Graphics g) {
 	
