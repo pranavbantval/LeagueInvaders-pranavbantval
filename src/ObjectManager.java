@@ -8,7 +8,7 @@ public class ObjectManager {
 	ArrayList<Alien> martians = new ArrayList<Alien>();
 	Rocketship ship;
 	long enemyTimer = 0;
-	int enemySpawnTime = 5000;
+	int enemySpawnTime = 2000;
 int score = 0;
 	// constructor
 	public ObjectManager(Rocketship rocket) {
@@ -101,5 +101,13 @@ int score = 0;
 			}
 		}
 
+	}
+	void restart() {
+		ship.x=250;
+		ship.y=700;
+		score=0;
+		ship.isAlive=true;
+		bullets.removeAll(bullets);
+		martians.removeAll(martians);
 	}
 }

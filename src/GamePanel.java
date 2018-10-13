@@ -6,12 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	// member variables
+	  public static BufferedImage alienImg;
+      public static BufferedImage rocketImg;
+      public static BufferedImage bulletImg;
+      public static BufferedImage spaceImg;
 	Rocketship rocket = new Rocketship(250, 700, 50, 50);
 	Timer timer;
 	final int MENU_STATE = 0;
@@ -26,6 +33,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public GamePanel() {
 
 		timer = new Timer(1000 / 60, this);
+		try {
+            alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+            rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+            bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+            spaceImg = ImageIO.read(this.getClass().getResourceAsStream("space.png"));
+    } catch (IOException e) {
+            // TODO Auto-generated catch block
+           e.printStackTrace();
+    }
 	}
 
 	// methods
@@ -38,13 +54,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		managerBob.manageEnemies();
 		managerBob.purgeObjects();
 		managerBob.checkCollision();
-
+if (!managerBob.ship.isAlive) {
+			currentState = END_STATE;
+		}
 	}
 
 	void updateEndState() {
-		if (!managerBob.ship.isAlive) {
-			currentState = END_STATE;
-		}
+		
 	}
 
 	void drawMenuState(Graphics g) {
@@ -55,12 +71,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("LEAGUE INVADERS", 20, 200);
 		g.setFont(subtitleFont);
 		g.drawString("Press ENTER to start", 120, 350);
-		g.drawString("Press SPACE for instructions", 80, 550);
+
 	}
 
 	void drawGameState(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		 g.drawImage(GamePanel.spaceImg, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
 		managerBob.draw(g);
 
 	}
@@ -123,6 +138,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END_STATE) {
 				currentState = MENU_STATE;
+				managerBob.restart();
+				
 			} else {
 				currentState++;
 			}

@@ -19,9 +19,6 @@ public class Alien extends GameObject {
 			}
 		}
 		void draw(Graphics g) {
-			g.setColor(Color.red);
-			g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
-			g.setColor(Color.YELLOW);
-	        g.fillRect(x, y, width, height);	
+			 g.drawImage(GamePanel.alienImg, x, y, width, height, null);
 		}
 }

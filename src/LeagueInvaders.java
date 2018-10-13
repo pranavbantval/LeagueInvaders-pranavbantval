@@ -12,6 +12,7 @@ public class LeagueInvaders {
 	public LeagueInvaders() {
 		frame = new JFrame();
 		gamepanel = new GamePanel();
+		
 	}
 //methods
 	public void setup() {
